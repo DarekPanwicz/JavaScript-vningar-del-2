@@ -13,6 +13,12 @@ if($a){
 }
 
 //kasuje caly cache
-$a= apcu_clear_cache();
+//$a= apcu_clear_cache();
+
+
+echo $a;
+
+apcu_delete ( 'test');
+
 
 //echo  phpinfo();
