@@ -1,96 +1,38 @@
 <?php
-class APCu {
-
-    private $time; //Domyślny czas istenienia w cache
-    private $namespace;
-
-    public function __construct(int $time = null, string $namespace = null)
-    {
-        $this->time = $time;
-        $this->namespace = $namespace;
-    }
-
-    public function setNamespace(string $namespace) : APCu
-    {
-        $this->namespace = $namespace;
-
-        return $this;
-    }
-
-    public function getCurrentNamespace() : string
-    {
-        return $this->namespace;
-    }
-
-    public function setTime(int $time) : APCu
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
-    public function getTime() : int
-    {
-        return $this->time;
-    }
-
+require_once 'ACPu.php';
+const A = 'A';
+const B = 'B';
+$acpu = new APCu(3600, A);
+$s = microtime(true);
+if ($test = $acpu->get("number3")) {
     /**
-     * @param string|null $key
-     * @param null $data
-     * @param array $test
-     *
-     * @return bool|bool[]
+     * Każde kolejne wykonanie skryptu przez godzinę
      */
-    public function add(string $key = null, $data = null, array $test = null)
-    {
-        if ($test) {
-            return $this->addMulti($test);
-        } else {
-//            var_dump()
-            if ($this->namespace) {
-                return apcu_store($this->namespace . '_' . $key, $data, $this->time);
-            } else {
-                return apcu_store($key, $data, $this->time);
-            }
-        }
+//    var_dump(2);
+//    echo $test;
+} else {
+    /**
+     * Pierwsze wykoanie skryptu
+     */
+//    var_dump(1);
+    $test = 0;
+    for ($i = 0; $i < 1000000; $i++) {
+        $test += $i * $i + 10;
     }
-
-    public function addMulti(array $data) : array
-    {
-        /**
-         * array(
-         * "key1" => false,
-         * "key2" => true
-         * )
-         */
-        if ($this->namespace) {
-            $temp = array();
-            foreach ($data as $key => $value) {
-                $temp[$this->namespace . '_' . $key] = $value;
-            }
-            return apcu_store($temp, $this->time);
-        }
-        return apcu_store($data, $this->time);
-    }
-
-    public function get(string $key)
-    {
-        if ($this->namespace) {
-            return apcu_fetch($this->namespace . '_' . $key);
-        }
-        return apcu_fetch($key);
-    }
-
-    public function delete(string $key)
-    {
-        if ($this->namespace) {
-            return apcu_delete($this->namespace . '_' . $key);
-        }
-        return apcu_delete($key);
-    }
-
-    public function clearAll() : bool
-    {
-        return apcu_clear_cache();
-    }
+    $acpu->add("number3", $test);
+//    echo $test;
 }
+var_dump(microtime(true) - $s);
+//$acpu->add("number", $test);
+//$acpu2 = new APCu(3600, B);
+//$acpu3 = new APCu(3600, "C");
+//
+//$acpu->add("test", "test value");
+//$acpu2->add("test", "test value2");
+//$acpu3->add("test", "test value3");
+//
+//echo $acpu->get("test") . '<br />';
+//echo $acpu2->get("test") . '<br />';
+//echo $acpu3->get("test") . '<br />';
+//
+//apcu_store("A" . '_' . "test", "test value");
