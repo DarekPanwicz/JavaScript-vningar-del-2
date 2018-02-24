@@ -6,10 +6,13 @@
  * Time: 12:53
  */
 require_once(Base.php);
-class Update  extends  Base
+class Update extends  Base
 
 {
 
-
+ public function validate()
+ {
+     // TODO: Implement validate() method.
+ }
 
 }

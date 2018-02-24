@@ -6,7 +6,10 @@
  * Time: 12:53
  */
 require_once(Base.php);
-class Read  extends  Base
+class Read extends  Base
 {
-
+    public function validate()
+    {
+        // TODO: Implement validate() method.
+    }
 }

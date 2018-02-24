@@ -6,7 +6,8 @@
  * Time: 12:54
  */
 
-class Base
+abstract class Base
 {
+    abstract public function validate();
 
 }

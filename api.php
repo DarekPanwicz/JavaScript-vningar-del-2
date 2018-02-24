@@ -1,27 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Darek P
- * Date: 2018-02-24
- * Time: 12:58
- */
+
+/*require_once(Base.php);
+require_once(Create.php);
+require_once(Read.php);
+require_once(Delete.php);
+require_once(Update.php);*/
+
 $method= $_SERVER["REQUEST_METHOD"];
 
 switch ($method) {
+
         case 'GET':
-        echo 'GET';
         break;
 
         case 'POST':
-        echo 'POST';
         break;
 
         case 'PUT':
-        echo 'PUT';
-         break;
+        break;
 
         case 'DELETE':
-        echo 'DELETE';
-         break;
+        break;
+
+        default:
+        echo "error";
+
 
 }

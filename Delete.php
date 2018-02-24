@@ -6,7 +6,10 @@
  * Time: 12:53
  */
 require_once(Base.php);
-class Delete  extends  Base
+class Delete extends  Base
 {
-
+    public function validate()
+    {
+        // TODO: Implement validate() method.
+    }
 }
