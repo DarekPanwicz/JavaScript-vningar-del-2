@@ -10,6 +10,11 @@ class Read extends  Base
 {
     public function validate()
     {
-        // TODO: Implement validate() method.
+
+    }
+
+    public function get()
+    {
+        //Pobierac ksiazke z bazy
     }
 }

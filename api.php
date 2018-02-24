@@ -11,15 +11,24 @@ $method= $_SERVER["REQUEST_METHOD"];
 switch ($method) {
 
         case 'GET':
-        break;
+            $read = new Read();
+
+            $_GET;
+
 
         case 'POST':
-        break;
+            $_POST;
+            $create= new Create();
+
 
         case 'PUT':
-        break;
+            $params = file_get_contents('php://input');
+            $update = new Update();
+
 
         case 'DELETE':
+            $_GET;
+            $delete = new Delete();
         break;
 
         default:
