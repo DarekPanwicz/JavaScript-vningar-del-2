@@ -29,18 +29,14 @@ switch ($method) {
 
            // $delete = new Delete($_GET['id']);
            // echo $delete->delete();
+            //var_dump(urldecode($_GET['title']));
+            //Url decode daje sie zawsze gdy jest string ktorego chcemy zdekodowac tak by pasowal w bazie
+            $delete = new Delete($_GET['id'],urldecode($_GET['title']));
+            $delete->deleteByTitle();
 
-            $delete = new Delete($id);
-            $this ->getDB()->("DELETE FROM books WHERE id = $id");
-            echo "ok" ;
 
 
-            public function deleteByTitle (string $title)
-        {
-            $delete = new Delete($title);
-            $this ->getDB()->("DELETE FROM books WHERE title = $title");
-            echo "Ksiazka zostala usunieta";
-        }
+
 
 
         break;
