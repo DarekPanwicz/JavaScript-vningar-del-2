@@ -10,7 +10,9 @@ var_dump($mysqli);
      (id, title, `author`, isbn, `publisher`, `pages`, `year`, `cover`, `copies`)
      VALUES (NULL, \"Test\", \"Autor\", \"9992158107\", \"wydawca\", 100, 2017, \"hard\", 32)"
 );*/
+
 // fetch_assoc
+
 $result= $mysqli->query('SELECT * FROM books');
 $temp =array();
 while($row=$result->fetch_assoc()){
