@@ -20,14 +20,15 @@ class Delete extends  Base
 
     public function delete()
     {
-        $result= $this->getDB()->query("DELETE FROM books WHERE id = ". $this->id);
+        $this->getDB()->query("DELETE FROM books WHERE id = ". $this->id);
 
         }
 
     public function deleteByTitle()
     {
 
-        $this->getDB()->query("DELETE FROM books WHERE title LIKE '". $this->title . "'");
+        $this->getDB()->query("DELETE FROM books WHERE title = '". $this->title . "'");
+
 
     }
 
