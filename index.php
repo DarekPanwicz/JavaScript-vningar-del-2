@@ -1,23 +1,47 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: flagoon
+ * Date: 18.02.18
+ * Time: 14:58
+ */
+declare(strict_types=1);
 
-//print_r($_SERVER);
 
-$ch =curl_init();
-$mysqli = new mysqli('127.0.0.1', 'dajmos008', 'vegeta11', 'bookstore');
-var_dump($mysqli);
+//Data for post.
+//$data = [
+//    "id" => NULL,
+//    "title" => "Pawel Kochanenk",
+//    "author" => "DP Haha",
+//    "year" => 1990
+//];
 
-/*$mysqli->query("INSERT INTO books
-     (id, title, `author`, isbn, `publisher`, `pages`, `year`, `cover`, `copies`)
-     VALUES (NULL, \"Test\", \"Autor\", \"9992158107\", \"wydawca\", 100, 2017, \"hard\", 32)"
-);*/
+//data for delete
 
-// fetch_assoc
+$data = [
+    "id" => null,
+    "title"=> "AI will kill us ALL :(",
+    "author"=>"Elon Musk",
+    "publisher"=>"Solar City",
+    "pages"=> 248
+];
 
-$result= $mysqli->query('SELECT * FROM books');
-$temp =array();
-while($row=$result->fetch_assoc()){
+$dataEncoded = json_encode($data);
 
-    $temp[]= $row;
-}
+//$data = array("name" => "Hagrid", "age" => "36");
+//$data_string = json_encode($data);
+//curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 
-var_dump($temp);
+
+$ch = curl_init('http://localhost:81/bitbucket/js/js/api.php');
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $dataEncoded);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Accept: text/plain',
+    'Content-Length: ' . strlen($dataEncoded),
+    'Content-Type: application/json'
+
+));
+$result = curl_exec($ch);
+var_dump($result);

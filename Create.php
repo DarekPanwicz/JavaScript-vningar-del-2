@@ -1,26 +1,24 @@
 <?php
-
-require_once('Base.php');
-class Create extends  Base
+/**
+ * Created by PhpStorm.
+ * User: flagoon
+ * Date: 24.02.18
+ * Time: 12:52
+ */
+declare(strict_types=1);
+require_once 'Base.php';
+class Create extends Base
 {
-
-    private $title;
-
-    public function __construct(string $title)
-    {
-        $this->title = (string) $title;
-    }
-
-
-    public function validate()
+    public function validate($params)
     {
         // TODO: Implement validate() method.
-        $_POST['title']= addslashes($_POST['title']);
     }
 
-    public function addBook(string $title)
+    public function createBook($params)
     {
-        $this->getDB()->query("INSERT INTO books (id,title) VALUES(null,'Smok')");
-        $title=addslashes($title);
+        $this->getDB()->query(
+            "INSERT INTO books
+                  (id, title, author, publisher,pages)
+                  VALUES (NULL, '$params->title', '$params->author' , '$params->publisher' , '$params->pages')");
     }
 }
